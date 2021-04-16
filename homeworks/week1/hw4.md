@@ -21,18 +21,18 @@
 
 ### Git 指令
 * **git init** 
-    git 版本控制的起手式，在 terminal 輸入 git init，電腦就會開始對該檔案進行版本控制
+    git 版本控制的起手式，在 terminal 輸入 git init，電腦就會開始對所在資料夾進行版本控制
 * **git status** 
     確認本版控制狀態
-* **git add & git rm --cached**
+* **git add 檔案名稱 & git rm --cached 檔案名稱**
     將檔案加入 & 取消版本控制
-*  **git commit -m**
+*  **git commit -m '檔案名稱'**
     新建一個版本
-*  **git commit -am '檔名'**
+*  **git commit -am '檔案名稱'**
     git add + git commit 合併用法，將檔案加入版本控制並新建版本。
     (注意!此方法只適用於修改之前已經 add 過的檔案，若是新建的檔案必須先 add 再 commit)
 * **git log**
-   歷史紀錄
+   顯示 commit 的歷史紀錄
 
 * **串連上述步驟**
     ```
@@ -62,7 +62,7 @@
 * **git diff**
   查看新舊版本差異
 * **git remote -v**
-  查看對應到的 GitHub 位置
+  列出所有遠端程式庫的位址
 
 ### Branch
 為什麼需要 Branch ?
@@ -115,7 +115,7 @@
     4. `$ git push origin 分支名稱`  將 local(自己電腦) 的 branch 推到遠端(gitHub)
     5. gitHub repository 同步完成
     ```    
-    新增 branch 之後，可以直接在 GitHub 上 merge，只要按 merge request 就可以了。
+    新增 branch 之後，可以直接在 GitHub 上 merge，只要按 pull request 就可以了。
 
 * **git pull**
   把 GitHub 上的檔案同步到電腦上

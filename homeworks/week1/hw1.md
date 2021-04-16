@@ -10,7 +10,7 @@
 3. 進入 mentor-program-5th-panoopan 中的 homeworks 資料夾
 4. 開始將作業寫在指定的檔案中
 5. 寫完後記得將修改過的檔案 add 加入版本控制(`$ git add 檔名`)
-6. commit 新建一個版本(`git commit -m "新建版本名稱" `)
+6. commit 新建一個版本(`$ git commit -m "新建版本名稱" `)
 **==一定要在新開的 branch 中寫作業！！！！==**
 
 ### 交作業
@@ -35,8 +35,8 @@
 
 ### 與我的 master 同步
 1. 在 mentor-program-5th-panoopan 資料夾 checkout 到 master
-2. `git status` 確認沒有進行中的東西
+2. `$ git status` 確認沒有進行中的東西
 3. 到 GitHub mentor-program-5th 按 clone 複製網址
-4. `git pull 網址 master`把新的改動拉下來
+4. `$ git pull 網址 master`把新的改動拉下來
 5. :wq 離開 vim 視窗
-6. `git push origin master`與遠端(mentor-program-5th-panoopan)的 master 同步
+6. `$ git push origin master`與遠端(mentor-program-5th-panoopan)的 master 同步
