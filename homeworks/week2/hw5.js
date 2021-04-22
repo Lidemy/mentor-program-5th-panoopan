@@ -1,19 +1,19 @@
 function join(arr, concatStr) {
     if(arr.length === 0) return ''
     if(arr.length === 1) return arr[0]
-    var ans = arr[0]
+    var result = arr[0]
     for(var i=1; i<arr.length; i++){
-        ans += (concatStr + arr[i])
+        result += (concatStr + arr[i])
     }
-    return ans 
+    return result 
 }
 
 function repeat(str, times) {
-    var ans = ''
+    var result = ''
     for(var i=1; i<=times; i++){
-        ans += str
+        result += str
     }
-    return ans
+    return result
 }
 
 console.log(join(['a'], '!'));
@@ -24,9 +24,9 @@ console.log(repeat('a', 5));
 function join(arr, concatStr) {
     if(arr.length === 0) return '' //special case: 當陣列是空的，回傳空字串
     
-    var ans = arr[0]
+    var result = arr[0]
     for(var i=1; i<arr.length; i++){
-        ans += (concatStr + arr[i])
+        result+= (concatStr + arr[i])
     }
-    return ans 
+    return result 
 }
