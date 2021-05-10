@@ -16,18 +16,16 @@ request(
   (error, response, body) => {
     if (error) return console.log(error)
 
-    let data
     try {
-      data = JSON.parse(body)
+      const data = JSON.parse(body)
+
+      const topData = data.top
+      for (let i = 0; i < topData.length; i += 1) {
+        console.log(`${topData[i].viewers} ${topData[i].game.name}`)
+      }
+      return true
     } catch (e) {
-      console.log(e) // 錯誤處理
+      return console.log(e) // 錯誤處理
     }
-
-    const topData = data.top
-
-    for (let i = 0; i < topData.length; i += 1) {
-      console.log(`${topData[i].viewers} ${topData[i].game.name}`)
-    }
-    return true
   }
 )

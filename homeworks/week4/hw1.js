@@ -6,16 +6,14 @@ request(
   (error, response, body) => {
     if (error) return console.log('抓取失敗', error)
 
-    let data
     try {
-      data = JSON.parse(body)
+      const data = JSON.parse(body)
+      for (let i = 0; i < data.length; i++) {
+        console.log(data[i].id, data[i].name)
+      }
+      return
     } catch (e) {
-      console.log(e) // 錯誤處理
+      return console.log(e) // 錯誤處理
     }
-
-    for (let i = 0; i < data.length; i++) {
-      console.log(data[i].id, data[i].name)
-    }
-    return response
   }
 )
