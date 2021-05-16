@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>報名表</title>
+    <style>
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed, 
+        figure, figcaption, footer, header, hgroup, 
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure, 
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        body {
+            background: #80808073;
+        }
+
+        .wrapper {
+            max-width: 500px;
+            margin: 50px auto;
+            border-top: solid 6px #fad312;
+            box-shadow: 1.8px 2.4px 5px 0 rgba(0, 0, 0, 0.3);
+            font-family: MicrosoftJhengHei;
+            background: white;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .header__info {
+            font-size: 14px;
+        }
+
+        .header__info div {
+            padding: 8px 0px;
+        }
+
+        .header__info-required {
+            font-size: 16px;
+            color: #e74149;
+        }
+
+        main>div {
+            margin: 30px 0px;
+        }
+
+        .title {
+            font-size: 20px;
+            padding: 20px 0px;
+        }
+
+        .title:after {
+            content: '*';
+            color: #e74149;
+            margin-left: 5px;
+        }
+
+        .fill input {
+            font-size: 20px;
+            width: 80%;
+        }
+
+        .option div {
+            padding: 10px 0px;
+        }
+
+        .other .title {
+            padding-bottom: 10px;
+        }
+
+        .uness:after {
+            content: ' ';
+        }
+
+        .other div:nth-child(2) {
+            margin-bottom: 20px;
+        }
+
+        .submit {
+            padding-top: 20px;
+        }
+
+        .submit__btn {
+            text-align: center;
+            background: #fad312;
+            border-radius: 3px;
+            font-size: 20px;
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+
+        footer {
+            font-family: MicrosoftJhengHei;
+            font-size: 13px;
+            color: #999999;
+            background: black;
+            text-align: center;
+            padding: 20px;
+        } 
+
+        @media only screen and (min-width: 768px) {
+            .fill input {
+                width: 50%;
+            }
+            
+            .submit__btn {
+                width: 20%;
+            }
+        }
+    </style>
+    
+</head>
+<body class>
+    <div class="wrapper">
+        <header>
+            <h1>新拖延運動報名表單</h1>
+            <div class="header__info">
+                <div>活動日期：2020/12/10 ~ 2020/12/11</div>
+                <div>活動地點：台北市大安區新生南路二段1號</div> 
+                <div class="header__info-required">* 必填</div>
+            </div>
+        </header>
+        
+        <main>
+            <div class="fill">
+                <div class="title">暱稱</div>
+                <div>
+                    <input type="text" placeholder="您的回答">
+                </div>
+            </div>
+            <div class="fill">
+                <div class="title">電子郵件</div>
+                <div>
+                    <input type="email" placeholder="您的電子郵件">
+                </div>
+            </div>
+            <div class="fill">
+                <div class="title">手機號碼</div>
+                <div>
+                    <input type="number" placeholder="您的手機號碼">
+                </div>
+            </div>
+            <div class="option">
+                <div class="title">報名類型</div>
+                <div><label for="imagine"><input type="radio" name="type" id="imagine">躺在床上用想像力實作</label></div>
+                <div><label for="ready"><input type="radio" name="type" id="ready">趴在地上滑手機找現成的作</label></div>            
+            </div>
+            <div class="fill">
+                <div class="title">怎麼知道這個活動的？</div>
+                <div>
+                    <input type="text" placeholder="您的回答">
+                </div>
+            </div>
+            <div class="fill other">
+                <div class="title uness">其他</div>
+                <div>對活動的一些建議</div>
+                <div>
+                    <input type="text" placeholder="您的回答">
+                </div>
+            </div>
+            <div class="submit">
+                <div class="submit__btn">提交</div>
+                <div>請勿透過表單送出您的密碼。</div>     
+            </div>
+        </main>
+    </div>
+    <footer>
+        <div>© 2020 © Copyright. All rights Reserved.</div>
+    </footer>
+</body>
+</html>
