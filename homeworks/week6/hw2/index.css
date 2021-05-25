@@ -1,0 +1,103 @@
+
+body {
+    background: #80808073;
+}
+
+.wrapper {
+    max-width: 500px;
+    margin: 50px auto;
+    border-top: solid 6px #fad312;
+    box-shadow: 1.8px 2.4px 5px 0 rgba(0, 0, 0, 0.3);
+    font-family: MicrosoftJhengHei;
+    background: white;
+    padding: 40px 20px;
+}
+
+header h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.header__info {
+    font-size: 14px;
+}
+
+.header__info div {
+    padding: 8px 0px;
+}
+
+.header__info-required {
+    font-size: 16px;
+    color: #e74149;
+}
+
+main>div {
+    margin: 30px 0px;
+}
+
+.title {
+    font-size: 20px;
+    padding: 20px 0px;
+}
+
+.title:after {
+    content: '*';
+    color: #e74149;
+    margin-left: 5px;
+}
+
+.fill input {
+    font-size: 20px;
+    width: 80%;
+}
+
+.option div {
+    padding: 10px 0px;
+}
+
+.other .title {
+    padding-bottom: 10px;
+}
+
+.uness:after {
+    content: ' ';
+}
+
+.other div:nth-child(2) {
+    margin-bottom: 20px;
+}
+
+.submit {
+    padding-top: 20px;
+}
+
+.submit__btn {
+    text-align: center;
+    background: #fad312;
+    border-radius: 3px;
+    font-size: 20px;
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+footer {
+    font-family: MicrosoftJhengHei;
+    font-size: 13px;
+    color: #999999;
+    background: black;
+    text-align: center;
+    padding: 20px;
+} 
+
+@media only screen and (min-width: 768px) {
+    .fill input {
+        width: 50%;
+    }
+    
+    .submit__btn {
+        width: 20%;
+    }
+}
