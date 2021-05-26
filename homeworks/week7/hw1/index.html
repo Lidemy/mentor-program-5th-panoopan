@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表單驗證</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class>
+    <div class="wrapper">
+        <header>
+            <h1>新拖延運動報名表單</h1>
+            <div class="header__info">
+                <div>活動日期：2020/12/10 ~ 2020/12/11</div>
+                <div>活動地點：台北市大安區新生南路二段1號</div> 
+                <div class="header__info-required">* 必填</div>
+            </div>
+        </header>
+        
+        <form>
+            <div class="input hide-error required">
+                <div class="title">暱稱</div>
+                <div>
+                    <input type="text" name="name" placeholder="您的回答">
+                    <div class="invalid">此為必填欄位</div>
+                </div>
+            </div>
+            <div class="input hide-error required">
+                <div class="title">電子郵件</div>
+                <div>
+                    <input type="text" name="email" placeholder="您的電子郵件">
+                    <div class="invalid">此為必填欄位</div>
+                </div>
+            </div>
+            <div class="input hide-error required">
+                <div class="title">手機號碼</div>
+                <div>
+                    <input type="text" name="phone" placeholder="您的手機號碼">
+                    <div class="invalid">此為必填欄位</div>
+                </div>
+            </div>
+            <div class="option hide-error required">
+                <div class="title">報名類型</div>
+                <div><label for="imagine"><input type="radio" name="type" id="imagine" value="1">躺在床上用想像力實作</label></div>
+                <div><label for="ready"><input type="radio" name="type" id="ready" value="2">趴在地上滑手機找現成的作</label></div>
+                <div class="invalid">此為必填欄位</div>
+            </div>
+            <div class="input hide-error required">
+                <div class="title">怎麼知道這個活動的？</div>
+                <div>
+                    <input type="text" name="how" placeholder="您的回答">
+                    <div class="invalid">此為必填欄位</div>
+                </div>
+            </div>
+            <div class="input other">
+                <div class="title uness">其他</div>
+                <div>對活動的一些建議</div>
+                <div>
+                    <input type="text" name="other" placeholder="您的回答">
+                </div>
+            </div>
+            <div class="submit">
+                <div>
+                    <input class="submit__btn" type="submit" value="提交">
+                </div>
+                <div>請勿透過表單送出您的密碼。</div>     
+            </div>
+        </form>
+    </div>
+    <footer>
+        <div>© 2020 © Copyright. All rights Reserved.</div>
+    </footer>
+    <script src="index.js"></script>
+</body>
+</html>
