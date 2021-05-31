@@ -47,6 +47,9 @@ input[type="text"] {
     max-width: 90%;
     color: #fff812;
     font-size: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 input[type="checkbox"] {
