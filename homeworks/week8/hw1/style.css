@@ -54,7 +54,7 @@
 
 .banner {
     position: relative;
-    height: 700px;
+    height: 900px;
     background: url(games-bn.png) center/cover no-repeat;
 }
 
@@ -208,7 +208,7 @@
 
 @media(max-width: 768px) {
     .navbar .wrapper {
-        height: 120px;
+        height: 150px;
         flex-direction: column;
         justify-content: space-between;
         padding: 0px;
@@ -232,7 +232,11 @@
     
     .game {
         border-radius: 0;
-        height: 92%;
+    }
+
+    .prize {
+        padding: 0;
+        width: 85%;
     }
 
     .footer__top .wrapper {

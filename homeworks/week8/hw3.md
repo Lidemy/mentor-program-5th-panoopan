@@ -8,9 +8,11 @@
 發出 request 之後不等結果回來就繼續執行下一行，等有 response 之後再 call back
 
 * Ajax 一定會受到同源政策限制
+> 助教建議：Ajax 的確是瀏覽器端上的技術，不過 CORS 主要是受瀏覽器限制，而非針對 Ajax 這個技術
 
 ## 用 Ajax 與我們用表單送出資料的差別在哪？
 * 用 Ajax 跟 form 傳送資料的主要差別，為資料處理為同步或非同步
+> 助教建議：這邊的同步與非同步會與程式概念中的名詞混淆（一定要逐行執行 vs 可以併行處理），Ajax 可以動態改變網站，在不需要換頁的情況下更動網站內容。
 
 * 使用 Ajax 時瀏覽器會把 server 回傳的 response 傳送給 javaScript，這樣可以用瀏覽器拿到 response 並且不用換頁，達到同步的效果
 ![form API2](https://img.onl/wlewcW)
