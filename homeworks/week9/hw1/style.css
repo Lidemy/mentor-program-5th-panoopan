@@ -1,0 +1,123 @@
+body {
+    margin: 0;
+    background: #80808085;
+}
+
+body * {
+    box-sizing: border-box;
+}
+
+header {
+    background: #ffe000de;
+    color: #382a04a8;
+    text-align: center;
+    padding: 10px;
+}
+
+main {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 500px;
+    background: white;
+}
+
+.button {
+    margin: 30px 0;
+}
+
+.button a {
+    text-decoration: none;
+    border: 1px solid rgb(48 189 163 / 89%);
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: black;
+}
+
+.button a:hover {
+    background: rgb(48 189 163 / 89%);
+    color: white;
+    transition: all 0.3s ease-in;
+}
+
+.comment {
+    margin: 10px 0;
+}
+h3 {
+    color: rgba(128, 29, 29, 0.824);
+}
+
+.comment__input div {
+    margin: 20px 0;
+}
+
+.comment__input input {
+    border: rgb(48 189 163 / 89%) 1px solid;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.comment__input textarea {
+    width: 100%;
+    border: rgb(48 189 163 / 89%) 1px solid;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.comment__btn {
+    padding: 10px 0;
+}
+
+.comment__btn input {
+    border: none;
+    background: rgb(48 189 163 / 89%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.card {
+    display: flex;
+    margin: 20px 0;
+}
+
+.card__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: coral;
+    margin-right: 10px;
+}
+
+.card__info {
+    max-width: 80%;
+}
+
+.card__info-title {
+    display: flex;
+    align-items: center;
+}
+
+.card__info-name {
+    color: coral;
+    font-weight: bold;    
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card__info-time {
+    color: #808080c7;
+    margin-left: 10px;
+    font-size: 14px;
+    min-width: 40%;
+}
+
+.card__info-content {
+    white-space:pre-line;
+    word-break: break-all;
+}
+
+
