@@ -6,7 +6,7 @@ require_once("utils.php");
 
 // 檢查表單欄位
 if (empty($_POST['nickname'])) {
-    header("Location: index.php?errCode=1");
+    header("Location: index.php?errCode=3");
     die ();
 }
 
