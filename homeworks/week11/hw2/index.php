@@ -9,6 +9,7 @@ if (!empty($_SESSION['username'])) {
 }
 
 // 把 carol_blog_articles table 的內容拿出來
+/* => 助教建議：這兩段差不多，看可不可以簡化～
 if (!empty($_GET['page']) && $_GET['page'] === 'list') {
   $sql =
     'SELECT '.  
@@ -33,6 +34,28 @@ if (!empty($_GET['page']) && $_GET['page'] === 'list') {
   $stmt = $conn->prepare($sql); 
   $stmt->bind_param('i', $limit);   
 }
+*/
+// 簡化後的寫法：把重複的部分做成 template 引入
+$sqlTemplate = 
+  ('SELECT '.  
+  'A.id AS id, A.title AS title, A.content AS content, '.
+  'A.created_at AS created_at, U.username AS username '.  
+  'FROM carol_blog_articles AS A '. 
+  'LEFT JOIN carol_blog_users AS U ON A.username = U.username '.  
+  'WHERE A.is_deleted IS NULL ');
+    if (!empty($_GET['page']) && $_GET['page'] === 'list') {
+      $sql = 
+        $sqlTemplate . 
+        'ORDER BY id DESC ';
+        $stmt = $conn->prepare($sql);
+    } else {
+      $sql =
+        $sqlTemplate .
+        'ORDER BY id DESC LIMIT ?'; 
+        $limit = 5;
+        $stmt = $conn->prepare($sql); 
+        $stmt->bind_param('i', $limit);       
+    }
 
 $result = $stmt->execute();
 if (!$result) {

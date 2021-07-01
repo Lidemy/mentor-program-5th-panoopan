@@ -81,22 +81,23 @@ $result = $stmt->get_result();
             <?php } ?>
         </section>
 
-        <!--標題-->
-        <h1 class="board__title">Comments</h1>
-
         <!--錯誤提示-->
         <?php
             if (!empty($_GET['errCode'])) {
                 $code = $_GET['errCode'];
-                $msg = 'Error';
                 if ($code === '1') {
                     $msg = '資料不齊全';
-                } else if ($code = 2) {
+                } else if ($code === '2') {
                     $msg = '權限不符';
+                } else if ($code === '3') {
+                    $msg = '請輸入新暱稱';
                 }
                 echo '<h2 class="error"> 錯誤:' . $msg .'</h2>';
             }
         ?>
+
+        <!--標題-->
+        <h1 class="board__title">Comments</h1>
 
         <!--留言表單-->
         <form class="board__new-comment-form" method="POST" action="handle_add_comment.php">
@@ -180,11 +181,18 @@ $result = $stmt->get_result();
 
     <!--編輯暱稱按鈕顯示功能-->
     <script>
-        var btn = document.querySelector(".update-nickname")
+        const btn = document.querySelector(".update-nickname")
         btn.addEventListener("click", function() {
-            var form = document.querySelector(".board__nickname-form")
+            const form = document.querySelector(".board__nickname-form")
             form.classList.toggle("hide")
         })
+
+        // 編輯暱稱為空白時，除了顯示錯誤訊息之外，也要顯示編輯暱稱的欄位
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        if (urlSearchParams.get('errCode') === '3') {
+            const form = document.querySelector(".board__nickname-form")
+            form.classList.remove("hide")
+        }
     </script>
 </body>
 </html>
