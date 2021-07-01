@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板hw12</title>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script>
+        $(document).ready(() => {
+            // 顯示留言
+            $.ajax({
+                type: 'GET',
+                url: 'http://mentor-program.co/mtr04group6/carol/week12/board/api_comments.php?site_key=pan'
+            }).done(data => {
+                if (!data.ok) {
+                    alert(data.message)
+                    return
+                }
+
+                const comments = data.discussions // 所有留言
+                const total = comments.length // 總共有幾筆留言
+                var limit = 5 // 一次顯示幾筆留言
+                var offset = 0 // 要從哪一筆資料開始顯示
+                var load = offset + limit 
+                viewMore(offset, load, total)
+
+                $('.btn-viewmore').click(e => {
+                    offset = load
+                    load += limit
+                    viewMore(offset, load, total)
+                })
+
+                function viewMore(offset, load, total) {
+                    if (load >= total) {
+                        $('.btn-viewmore').remove()
+                    } // 
+
+                    for (let i=offset; i<load; i++) {
+                        $('.comments').append(
+                            `
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">${escapeHtml(comments[i].nickname)}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">${escapeHtml(comments[i].created_at)}</h6>
+                                    <p class="card-text">${escapeHtml(comments[i].content)}</p>
+                                </div>      
+                            </div>
+                            `
+                        )
+                    }
+                }
+            })
+
+            // 新增留言
+            $('.add-comment-form').submit(e => {
+                e.preventDefault()
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://mentor-program.co/mtr04group6/carol/week12/board/api_add_comment.php',
+                    data: {
+                        site_key: 'pan',
+                        nickname: $('input[name=nickname]').val(),
+                        content: $('textarea[name=content]').val()
+                    }
+                }).done(data => {
+                    if (!data.ok) {
+                        alert(data.message)
+                        return
+                    }
+                    
+                    // 留言新增成功時，重新載入頁面，把新增的留言 render 出來
+                    location.reload();
+                })
+            })
+        })
+
+        // 預防 xss 攻擊
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+    <style>
+        .card {
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <div class="container p-5">
+        <h1 class="text-center mb-3">Message Board</h1>
+        <form class="add-comment-form">
+            <div class="form-group mb-3">
+                <label for="form-nickname" class="form-label">Nickname</label>
+                <input name="nickname" type="text" class="form-control" id="form-nickname">
+            </div>
+            <div class="form-group mb-3">
+                <label for="content-textarea">Content</label>
+                <textarea name="content" class="form-control" id="content-textarea" rows="3"></textarea>
+              </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+          </form>
+          <div class="comments">
+            <!--
+              <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Pan</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">2021-06-27</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  </div>      
+              </div>
+            -->
+          </div>
+          <button type="button" class="btn btn-viewmore btn-primary mt-2">View more</button>
+    </div>  
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

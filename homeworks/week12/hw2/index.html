@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo hw12</title>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.css">
+    <script>
+        $(document).ready(()=> {
+            // todo 模板
+            const template = 
+            `
+            <label class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3">
+                <div class="list-input list-{status} d-flex flex-fill">
+                    <input class="check form-check-input me-1" type="checkbox">
+                    <span name="item" class="d-inline-block text-truncate" style="max-width: 400px">{content}</span>
+                </div>
+                <input class="list-edit form-control visually-hidden" type="text" aria-label="default input example">
+                <button type="button" class="btn btn-edit btn-link">Edit</button>
+                <button type="button" class="btn-close" aria-label="Close"></button>
+            </label>
+            `
+            
+            // 新增 todo
+            $('.form-input').keydown(e => {
+                if (e.keyCode === 13) {
+                    var value = $(e.target).val()
+                    $(e.target).val('')
+                    $('.list-group').append(
+                        template
+                        .replace('{content}', escapeHtml(value))
+                        .replace('{status}', 'active')
+                    )
+                }
+            })
+
+            // 其他功能
+            $('main').click(e => {
+                // 標示
+                if ($(e.target).prop("checked") && e.target.type === 'checkbox') {
+                    $(e.target).parent().addClass('list-complete text-decoration-line-through text-muted')
+                    $(e.target).parent().removeClass('list-active')
+                } else if ((!$(e.target).prop("checked")) && e.target.type === 'checkbox') {
+                    $(e.target).parent().removeClass('list-complete text-decoration-line-through text-muted')
+                    $(e.target).parent().addClass('list-active')
+                }
+
+                // 編輯
+                if ($(e.target).hasClass('btn-edit')) {
+                    let target = $(e.target)
+                    let parent = $(e.target).parent()
+                    let text = parent.find('span').text()
+                    target.addClass('visually-hidden')
+                    parent.find('.list-input').addClass('visually-hidden')
+                    parent.find('.list-edit').val(text)
+                    parent.find('.list-edit').removeClass('visually-hidden')
+
+                    $('.list-edit').keydown(e => {
+                        if (e.keyCode === 13) {
+                            let target = $(e.target)
+                            let parent = $(e.target).parent()
+                            let value = target.val()
+                            parent.find('span').text(value)
+                            target.addClass('visually-hidden')
+                            parent.find('.list-input').removeClass('visually-hidden')
+                            parent.find('.btn-edit').removeClass('visually-hidden')
+                        }
+                    })
+                }
+
+                // 顯示全部
+                if ($(e.target).hasClass('btn-all')) {
+                    $('.list-group-item').removeClass('visually-hidden')
+                    $('.save-btn').removeClass('visually-hidden')
+                }
+
+                // 顯示未完成
+                if ($(e.target).hasClass('btn-active')) {
+                    let count = $('.list-active').length
+                    $('.list-active').parent().removeClass('visually-hidden')
+                    $('.list-complete').parent().addClass('visually-hidden')
+                    $('.save-btn').addClass('visually-hidden')
+                    $('.count-active').removeClass('visually-hidden')
+                    $('.count-active').text(count)
+                }else {
+                    $('.count-active').addClass('visually-hidden')
+                }
+
+                // 顯示已完成
+                if ($(e.target).hasClass('btn-complete')) {
+                    let count = $('.list-complete').length
+                    $('.list-complete').parent().removeClass('visually-hidden')
+                    $('.list-active').parent().addClass('visually-hidden')
+                    $('.save-btn').addClass('visually-hidden')
+                    $('.count-complete').removeClass('visually-hidden')
+                    $('.count-complete').text(count)
+                }else {
+                    $('.count-complete').addClass('visually-hidden')
+                }
+
+                // 刪除
+                if ($(e.target).hasClass('btn-close')) {
+                    $(e.target).parent().remove()
+
+                }
+
+                // 刪除全部
+                if ($(e.target).hasClass('clear-all-btn')) {
+                    $('.list-group').empty()
+                }
+
+                // 刪除已完成
+                if ($(e.target).hasClass('clear-complete-btn')) {
+                    $('.list-complete').parent().remove()
+                }
+            })
+
+            // UI 轉成資料並儲存到資料庫
+            $('.save-btn').click(e => {
+                let todos = []
+                $('.list-input').each((i, element) => {
+                    todos.push({
+                        id: i+1,
+                        isDone: $(element).hasClass('list-complete'),
+                        content: $(element).find('span').text()
+                    })                    
+                })
+                const data = JSON.stringify(todos)
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://mentor-program.co/mtr04group6/carol/week12/todos/api_add_todo.php',
+                    data: {
+                        todo: data
+                    },
+                    success: function(res) {
+                        const id = res.id
+                        window.location = 'index.html?id=' + id
+                    }, 
+                    error: function() {
+                        alert('Error')
+                    }
+                })
+            })
+
+            // 載入資料
+            const searchParams = new URLSearchParams(window.location.search);
+            const todoId = searchParams.get('id')
+            if (todoId) {
+                $.getJSON('http://mentor-program.co/mtr04group6/carol/week12/todos/api_get_todos.php?id=' + todoId, 
+                function(data) {
+                    const todos = JSON.parse(data.data.todo)
+                    const dataId = data.data.id
+                    $('h1').text(`Todos #${dataId}`)
+                    $('.list-example').remove()
+                    $('.save-btn').remove()
+                    
+                    for(let todo of todos) {
+                        if (todo.isDone) {
+                            $('.list-group').append(
+                                template
+                                .replace('{content}', escapeHtml(todo.content))
+                                .replace('{status}', 'complete text-decoration-line-through text-muted')
+                            )
+                        } else {
+                            $('.list-group').append(
+                                template
+                                .replace('{content}', escapeHtml(todo.content))
+                                .replace('{status}', 'active')
+                            )
+                        }
+                    }
+
+                    $('.list-input').each((i, element) => {
+                        if ($(element).hasClass('list-complete')) {
+                            $(element).find('.check').prop("checked", true)
+                        }
+                    })
+                });
+            }
+        })
+
+
+        // 預防 xss 攻擊
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+
+    <style>
+        body {
+            background: #ecd0487a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container p-4" style="max-width: 600px">
+        <h1 class="text-center m-3">Todos</h1>
+
+        <div class="form-floating mb-4">
+            <input type="text" class="form-input form-control" id="floatingInput" placeholder="What needs to be done?">
+            <label for="floatingInput">What needs to be done?</label>
+        </div>
+
+        <main>
+            <div class="buttons d-flex justify-content-between p-2">
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check btn-all" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="btnradio1">All</label>
+                  
+                    <input type="radio" class="btn-check btn-active" name="btnradio" id="btnradio2" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btnradio2">Actives
+                        <span class="count-active position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger visually-hidden">99+</span>
+                    </label>
+                  
+                    <input type="radio" class="btn-check btn-complete" name="btnradio" id="btnradio3" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btnradio3">Completed
+                        <span class="count-complete position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger visually-hidden">99+</span>
+                    </label>
+                </div>
+                <div class="btn-group dropend">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Clear
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="clear-all-btn dropdown-item">Clear All</a></li>
+                        <li><a class="clear-complete-btn dropdown-item">Clear Completed</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="list-group">
+                <label class="list-example list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3">
+                    <div class="list-active list-input d-flex flex-fill">
+                        <input class="form-check-input me-1" type="checkbox">
+                        <span name="item" class="d-inline-block text-truncate" style="max-width: 400px">Example</span>
+                    </div>
+                    <input class="list-edit form-control visually-hidden" type="text" aria-label="default input example">
+                    <button type="button" class="btn btn-edit btn-link">Edit</button>
+                    <button type="button" class="btn-close" aria-label="Close"></button>
+                </label>
+            </div>
+
+            <div class="text-center">
+                <button type="button" class="save-btn btn btn-info mt-2">Save</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
