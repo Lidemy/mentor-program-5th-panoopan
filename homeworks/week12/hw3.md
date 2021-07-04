@@ -8,7 +8,7 @@ SPA 及 MPA 為兩種不同的網頁設計方式
     * 網站的每一個畫面都是個別的 HTML 檔案，因此每次載入新的頁面都重新載入一次
 
 ![spa&mpa](https://img.onl/uFZFAf)
-![spa&mpa](https://img.onl/TW3urj)
+![spa&mpa](https://img.onl/Rkh07b)
 
 3. 使用時機
     * MPA 跟 SPA 都有其各自較適合使用的情境，首先必須明確你的商業目標，然後依照實現這些目標需要具備的功能去選擇適當的設計方法，或是混合使用。
@@ -53,9 +53,9 @@ Ajax 可以非同步的拿到的資料，並由客戶端透過 JavaScript 渲染
 * PHP 
     1. 把資料拿出來
     2. 把資料跟 HTML 結合(UI) 在一起
-    3. 回傳 HTML
-    4. browser => render
-    5. server-side render
+    3. server-side render
+    4. 回傳 HTML、CSS、JavaScript
+    5. browser => render
 
 * Ajax
     1. 把資料拿出來
@@ -67,6 +67,7 @@ Ajax 可以非同步的拿到的資料，並由客戶端透過 JavaScript 渲染
 
 ## Reference
 * [Single-Page Apps vs Multi-Page Apps: What To Choose For Web Development](https://www.thirdrocktechkno.com/blog/single-page-apps-vs-multi-page-apps-what-to-choose-for-web-development/)
+* [Single-page App vs. Multi-page App: Pros, Cons, and Which is Better?](https://lvivity.com/single-page-app-vs-multi-page-app)
 * [Difference Between AJAX and PHP](http://www.differencebetween.net/technology/difference-between-ajax-and-php/)
 * [[Angular 深入淺出三十天] Day 01 - MPA 與 SPA](https://ithelp.ithome.com.tw/articles/10202427)
 * [SEO 優缺點剖析，甚麼時候該用哪個？](https://www.leunghoyin.hk/spa-vs-mpa)

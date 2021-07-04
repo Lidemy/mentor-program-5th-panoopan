@@ -43,7 +43,7 @@ $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $json = array(
   "ok" => true,
-  "data" => array(
+  "todoData" => array(
     "id" => $row["id"],
     "todo" => $row["todo"]
   )

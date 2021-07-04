@@ -12,10 +12,10 @@
 
     <script>
         $(document).ready(() => {
-            // 顯示留言
+            const url = 'http://mentor-program.co/mtr04group6/carol/week12/board'
             $.ajax({
                 type: 'GET',
-                url: 'http://mentor-program.co/mtr04group6/carol/week12/board/api_comments.php?site_key=pan'
+                url: `${url}/api_comments.php?site_key=pan`
             }).done(data => {
                 if (!data.ok) {
                     alert(data.message)
@@ -38,7 +38,7 @@
                 function viewMore(offset, load, total) {
                     if (load >= total) {
                         $('.btn-viewmore').remove()
-                    } // 
+                    } 
 
                     for (let i=offset; i<load; i++) {
                         $('.comments').append(
@@ -59,9 +59,13 @@
             // 新增留言
             $('.add-comment-form').submit(e => {
                 e.preventDefault()
+
+                // 助教建議：新增留言的按鈕可以在傳送資料的時候先 disable，不然連點的時候會連續增加好幾個留言
+                $('button').hide()
+
                 $.ajax({
                     type: 'POST',
-                    url: 'http://mentor-program.co/mtr04group6/carol/week12/board/api_add_comment.php',
+                    url: `${url}/api_add_comment.php`,
                     data: {
                         site_key: 'pan',
                         nickname: $('input[name=nickname]').val(),
@@ -72,7 +76,7 @@
                         alert(data.message)
                         return
                     }
-                    
+
                     // 留言新增成功時，重新載入頁面，把新增的留言 render 出來
                     location.reload();
                 })
