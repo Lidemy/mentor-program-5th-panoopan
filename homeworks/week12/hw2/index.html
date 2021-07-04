@@ -76,7 +76,6 @@
                 // 顯示全部
                 if ($(e.target).hasClass('btn-all')) {
                     $('.list-group-item').removeClass('visually-hidden')
-                    $('.save-btn').removeClass('visually-hidden')
                 }
 
                 // 顯示未完成
@@ -84,7 +83,8 @@
                     let count = $('.list-active').length
                     $('.list-active').parent().removeClass('visually-hidden')
                     $('.list-complete').parent().addClass('visually-hidden')
-                    $('.save-btn').addClass('visually-hidden')
+                    // 助教建議：儲存按鈕可以不用藏
+                    // $('.save-btn').addClass('visually-hidden')
                     $('.count-active').removeClass('visually-hidden')
                     $('.count-active').text(count)
                 }else {
@@ -96,7 +96,8 @@
                     let count = $('.list-complete').length
                     $('.list-complete').parent().removeClass('visually-hidden')
                     $('.list-active').parent().addClass('visually-hidden')
-                    $('.save-btn').addClass('visually-hidden')
+                    // 助教建議：儲存按鈕可以不用藏
+                    // $('.save-btn').addClass('visually-hidden')
                     $('.count-complete').removeClass('visually-hidden')
                     $('.count-complete').text(count)
                 }else {
@@ -121,6 +122,9 @@
             })
 
             // UI 轉成資料並儲存到資料庫
+            // 助教建議：API 的位址有兩個地方會用到 ，感覺可以另外存在一個 API_URL 變數裡面
+            // const url = 'http://localhost:8080/panoopan/be101/todo-hw12'
+            const url = 'http://mentor-program.co/mtr04group6/carol/week12/todos'
             $('.save-btn').click(e => {
                 let todos = []
                 $('.list-input').each((i, element) => {
@@ -131,10 +135,12 @@
                     })                    
                 })
                 const data = JSON.stringify(todos)
+                const searchParams = new URLSearchParams(window.location.search);
+                const todoId = searchParams.get('id')
 
                 $.ajax({
                     type: 'POST',
-                    url: 'http://mentor-program.co/mtr04group6/carol/week12/todos/api_add_todo.php',
+                    url: `${url}/api_add_todo.php`,
                     data: {
                         todo: data
                     },
@@ -152,10 +158,11 @@
             const searchParams = new URLSearchParams(window.location.search);
             const todoId = searchParams.get('id')
             if (todoId) {
-                $.getJSON('http://mentor-program.co/mtr04group6/carol/week12/todos/api_get_todos.php?id=' + todoId, 
-                function(data) {
-                    const todos = JSON.parse(data.data.todo)
-                    const dataId = data.data.id
+                $.getJSON(`${url}/api_get_todos.php?id=${todoId}`, 
+                // 助教建議：我覺得這一大段落的變數命名可以再思考一下，很多地方直接命名為 data 最後會有點混淆，在取值的時候就會變成 data.data.XXX 可讀性稍微差了一點。
+                function(jsonData) {
+                    const todos = JSON.parse(jsonData.todoData.todo)
+                    const dataId = jsonData.todoData.id
                     $('h1').text(`Todos #${dataId}`)
                     $('.list-example').remove()
                     $('.save-btn').remove()
