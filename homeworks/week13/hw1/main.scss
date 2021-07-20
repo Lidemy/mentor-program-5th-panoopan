@@ -1,0 +1,192 @@
+@import 'variables';
+@import 'mixins';
+@import 'layout';
+
+* {
+    box-sizing: border-box;
+}
+
+
+.wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0px 12px;
+}
+  
+  
+.container-wrapper {
+    @include flexCenter();
+    padding-bottom: 138px;
+    min-height: calc(100vh - 350px);
+}
+  
+.posts, .container {
+    background: $color-background;
+    padding: 6px;
+    display: inline-flex;
+    margin: 0 auto;
+    margin-top: -30px;
+    flex-direction: column;
+}
+  
+.post {
+    width: 900px;
+    padding: 30px;
+    border: solid 1px $color-border;
+
+    + .post {
+        margin-top: 24px;
+    }
+
+    &__header {
+        font-size: $font-md;
+        @include flexCenter(space-between);
+    }
+
+    &__action {
+        @include btn($color-sm-btn);
+        padding: 3px 12px;
+        font-size: $font-sm;
+    }
+
+    &__info {
+        margin-top: 19px;
+        padding: 12px 22px;
+        background: $color-tertiary;
+    }
+
+    &__content {
+        margin-top: 17px;
+        white-space: $white-space;
+        line-height: $line-height;
+        max-height: 140px;
+        overflow: hidden;
+    }
+
+    &__content-blog {
+        margin-top: 17px;
+        white-space: $white-space;
+        line-height: $line-height;
+    }
+}
+  
+.btn-read-more {
+    @include btn($color-lg-btn);
+    padding: 12px 16px;
+    margin-top: 36px;
+}
+
+.login-wrapper {
+    @include flexCenter();
+    flex-direction: column;
+    margin: 0 auto;
+    border: solid 1px $color-primary;
+    width: 527px;
+    padding: 62px 72px;
+    margin-top: -30px;
+    background: $color-background;
+
+    form {
+        width: 100%;
+    }
+
+    input {
+        width: 100%;
+
+        &[type=submit] {
+            height: 56px;
+            background-image: linear-gradient(to top, $color-primary, $color-secondary);
+            color: $color-tertiary;
+            margin-top: 73px;
+        }
+    }
+
+    h2 {
+        font-size: $font-xl;
+        font-weight: normal;
+    }
+}
+
+.input {
+    &__field {
+        margin-top: 16px;
+        height: 40px;
+    }
+
+    &__wrapper + {
+        .input__wrapper {
+            margin-top: 23px;
+        }
+    }
+    
+    &__label {
+        font-size: $font-sm;
+        margin-left: 21px;
+    }
+}
+    
+.edit-post {
+    width: 900px;
+    padding: 30px;
+    border: solid 1px $color-border;
+
+    &__title {
+        font-size: $font-lg;
+    }
+
+    &__input-wrapper {
+        width: 100%;
+        margin-top: 28px;
+
+        input, textarea {
+            width: 100%;
+            padding: 6px;
+        }
+    }
+
+    &__btn-wrapper {
+        text-align: right;
+    }
+
+    &__btn {
+        @include btn($color-lg-btn);
+        padding: 10px 39px;
+        margin-top: 25px;
+    }
+}
+
+.admin-post {
+    @include flexCenter(space-between);
+    padding: 24px 0px;
+    border-bottom: 1px solid $color-border;
+    font-size: $font-sm;
+    width: 920px;
+
+    &__title {
+        font-size: $font-md;
+        margin-left: 16px;
+    }
+
+    &__info {
+        @include flexCenter();
+        margin-left: 12px;
+    }
+
+    &__created-at {
+        color: $color-link;
+    }
+
+    &__btn {
+        @include btn($color-sm-btn);
+        padding: 4px 8px;
+        margin-left: 8px;
+
+        &:last-child {
+            margin-right: 16px;
+        }
+    }
+}
+
+.error {
+    color: $color-error;
+}

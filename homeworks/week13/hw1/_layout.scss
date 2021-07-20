@@ -1,0 +1,68 @@
+@import 'variables';
+@import 'mixins';
+
+.navbar {
+    height: 80px;
+
+    &__site-name {
+        font-size: $font-xl;
+        font-weight: bold;
+
+        a {
+            @include link($color-lighter-primary)
+        }
+    }
+
+    &__list {
+        @include flexCenter(space-between);
+        flex: 1;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        > div {
+            @include flexCenter();
+        }
+
+        li {
+            margin-left: 21px;
+        }
+
+        a {
+            @include link($color-link);
+            font-size: $font-md;
+        }
+    }
+
+    &__wrapper {
+        @include flexCenter();
+        height: 100%;
+    }
+}
+
+.banner {
+    @include flexCenter();
+    flex-direction: column;
+    background-image: linear-gradient(to top, $color-primary, $color-secondary);
+    height: 240px;
+    color: $color-tertiary;
+
+    &__wrapper > {
+        div {
+            margin-top: 26px;
+        }
+    }
+
+    h1 {
+        font-size: $font-xl;
+        margin: 0;
+    }
+}
+
+footer {
+    padding: 10px 0px;
+    background-color: $color-footer;
+    font-size: $font-sm;
+    color: $color-background;
+    text-align: center;
+}
