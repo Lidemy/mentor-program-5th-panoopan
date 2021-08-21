@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include("template/head")%>
+</head>
+
+<body> 
+  <%- include("template/navbar") %> 
+  
+  <main class="articles my-5 col-md-6 mx-auto" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <div class="card mb-5 shadow bg-white rounded">
+      <div class="card-header">
+        <h5>
+          <%= article.title %>
+          <% if(username === article.userName) { %> 
+            <a href="/edit?id=<%= article.id %>" class="btn btn-outline-primary btn-sm float-right">編輯</a>
+          <% } %>
+        </h5>
+      </div>
+      <div class="card-body">
+        <div>
+          <p class="card-text text-muted">
+            <i class="bi-calendar2-week-fill"> </i>
+            <%= (article.createdAt + '').split(' ').slice(0, 4).join(' ') %>
+            posted by  
+            <a href="#"><%= article.userName %></a>
+          </p>
+          <div class="card-text"  style="max-height: 50vh; overflow: scroll; white-space:pre-line">
+            <%= article.content %>
+          </div>
+        </div>
+        <div>
+          <a href="/" class="btn btn-primary mt-3 float-right">Back</a>
+        </div>  
+      </div>
+    </div>
+  </main>
+<!--
+  <div class="container-wrapper">
+    <div class="posts">
+      <article class="post">
+        <div class="post__header">
+          <div><%= article.title %></div>
+          <% if(username === article.userName) { %>
+            <div class="post__actions">
+              <a class="post__action" href="/edit?id=<%= article.id %>">編輯</a>
+            </div>
+          <% } %>
+        </div>
+        <div class="post__info">
+          <%= (article.createdAt + '').split(' ', 5).join(' ') %>
+        </div>
+        <div class="post__content-blog">
+          <%= article.content %>
+        </div>
+      </article>
+    </div>
+  </div>
+-->
+  
+  <%- include("template/bundle") %> 
+</body>
+</html>
