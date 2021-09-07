@@ -1,0 +1,59 @@
+<% if(username){ %>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include("template/head") %>
+</head>
+
+<body> 
+  <%- include("template/navbar") %> 
+
+  <section class="col-10 col-md-8 mx-auto" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);max-height: 80vh; overflow: scroll;">
+    <% articles.forEach(article => { %> 
+    <div class="card shadow-sm mb-3 bg-white rounded">
+        <div class="card-body d-flex flex-column align-items-start flex-md-row justify-content-md-between">
+          <div class="pr-3">
+            <h5 class="card-title"><%= article.title %></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%= (article.createdAt + '').split(' ').slice(0, 4).join(' ') %></h6>
+            <% console.log((article.createdAt + '').split(' ').slice(0, 4)) %>
+          </div>
+          <div class="flex-shrink-0">
+            <a href="/delete?id=<%= article.id %>" class="btn btn-outline-danger mt-3 btn-sm float-right"><i class="bi-trash mr-1"></i>刪除</a>
+            <a href="/edit?id=<%= article.id %>" class="btn btn-outline-primary mt-3 mr-2 btn-sm float-right"><i class="bi-pencil mr-1"></i>編輯</a>
+          </div>
+        </div>
+    </div>
+    <% }) %> 
+</section>
+
+<!--
+  <div class="container-wrapper">
+    <div class="posts">
+      <% articles.forEach(article => { %> 
+        <div class="admin-post">
+          <div class="admin-post__title">
+            <%= article.title %>
+          </div>
+          <div class="admin-post__info">
+            <div class="admin-post__created-at">
+              <%= (article.createdAt + '').split(' ', 5).join(' ') %>
+            </div>
+            <a class="admin-post__btn" href="/edit?id=<%= article.id %>">
+              編輯
+            </a>
+            <a class="admin-post__btn" href="/delete?id=<%= article.id %>">
+              刪除
+            </a>
+          </div>
+        </div>
+      <% }) %> 
+    </div>
+  </div>
+-->
+
+  <%- include("template/bundle") %> 
+</body>
+</html>
+
+<% } %> 

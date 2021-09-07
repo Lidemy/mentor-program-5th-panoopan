@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include("template/head")%>
+</head>
+
+<body> 
+  <%- include("template/navbar") %> 
+
+  <%- include("template/banner") %> 
+
+  <div class="container">
+    <main class="articles my-3 col-md-8 mx-auto">
+      <% articles.forEach(article => { %> 
+        <div class="card mb-5 shadow bg-white rounded">
+            <div class="card-header">
+              <h5><%= article.title %></h5>
+            </div>
+            <div class="card-body">
+              <div>
+                <p class="card-text text-muted">
+                  <i class="bi-calendar2-week-fill"> </i>
+                  <%= (article.createdAt + '').split(' ').slice(0, 4).join(' ') %>
+                  posted by  
+                  <a href="#"><%= article.userName %></a>
+                </p>
+                <div class="card-text overflow-hidden text-truncate text-nowrap">
+                  <%= article.content %>
+                </div>
+              </div>
+              <div>
+                <a href="/blog?id=<%= article.id %>" class="btn btn-primary mt-3  btn-sm float-right">READ MORE</a>
+                <% if(username === article.userName) { %> 
+                  <a href="/edit?id=<%= article.id %>" class="btn btn-outline-primary mt-3 mr-3 btn-sm float-right"><i class="bi-pencil mr-1"></i>編輯</a>
+                <% } %>
+              </div>  
+            </div>
+        </div>
+      <% }) %>
+    </main>
+  </div>
+
+  <% if(page) { %>
+    <section class="paginator text-center">
+          <div class="d-inline-block text-center mt-2">
+            <ul class="pagination">
+              <% if (page != 1 ) { // 非首頁 %> 
+                <li class="page-item"><a class="page-link" href="/list?page=1">首頁</a></li>
+                <li class="page-item"><a class="page-link" href="/list?page=<%= Number(page) - 1 %>">上一頁</a></li>
+              <% } %>
+
+              <% if (page != totalPage ) {  // 非最後一頁%>
+                <li class="page-item"><a class="page-link" href="/list?page=<%= Number(page) + 1 %>">下一頁</a></li>
+                <li class="page-item"><a class="page-link" href="/list?page=<%= totalPage %>">最後一頁</a></li>
+              <% } %>
+            </ul>  
+          </div>
+          <div class="page-info text-muted">
+            <span>共 <%= count %> 篇文章，頁數：</span>
+            <span><%= page %> / <%= totalPage %></span>
+        </div>
+    </section>
+  <% } %>   
+
+<!--
+  <div class="container-wrapper">
+    <div class="posts">
+      <% articles.forEach(article => { %> 
+        <article class="post">
+          <div class="post__header">
+            <div><%= article.title %></div>
+            <% if(username === article.userName) { %> 
+              <div class="post__actions">
+                <a class="post__action" href="/edit?id=<%= article.id %>">編輯</a>
+              </div>
+            <% } %>
+          </div>
+          <div class="post__info">
+            <%= (article.createdAt + '').split(' ', 5).join(' ') %>
+          </div>
+          <div class="post__content">
+            <%= article.content %>
+          </div>
+          <a class="btn-read-more" href="/blog?id=<%= article.id %>">READ MORE</a>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+
+  <% if(page) { %>
+    <section>
+      <div class="page-info">
+          <span>總共有<%= count %>篇文章，頁數：</span>
+          <span><%= page %> / <%= totalPage %></span>
+      </div>
+      <div class="paginator">
+          <% if (page != 1 ) { // 非首頁 %> 
+              <a href="/list?page=1">首頁</a>
+              <a href="/list?page=<%= Number(page) - 1 %>">上一頁</a>
+          <% } %>
+          <% if (page != totalPage ) {  // 非最後一頁%>
+              <a href="/list?page=<%= Number(page) + 1 %>">下一頁</a>
+              <a href="/list?page=<%= totalPage %>">最後一頁</a>
+          <% } %>
+      </div>
+    </section>
+  <% } %>
+-->
+
+
+  <%- include("template/bundle") %> 
+</body>
+</html>
