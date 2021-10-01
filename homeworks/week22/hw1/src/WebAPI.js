@@ -10,7 +10,7 @@ export const getPosts = (page) => {
 
 export const getUserPosts = (id) => {
   return fetch(
-    `${BASE_URL}/posts?userId=${id}&_expand=user&_sort=createdAt&_order=des`
+    `${BASE_URL}/posts?userId=${id}&_expand=user&_sort=createdAt&_order=desc`
   ).then((res) => res.json());
 };
 

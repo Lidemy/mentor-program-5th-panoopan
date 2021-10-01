@@ -22,15 +22,15 @@ const Container = styled.div`
   }
 `;
 
-const PostWrapper = styled.div``;
+const Wrapper = styled.div``;
 
-const PostTitle = styled(Link)`
+const Title = styled(Link)`
   font-size: 22px;
   color: white;
   text-decoration: none;
 `;
 
-const PostInfo = styled.div`
+const Info = styled.div`
   margin-top: 12px;
   font-size: 16px;
 `;
@@ -65,17 +65,17 @@ function Post({ post }) {
   const location = useLocation();
   return (
     <Container>
-      <PostWrapper>
-        <PostTitle to={`/post/${post.id}`}>{post.title}</PostTitle>
-        <PostInfo>
+      <Wrapper>
+        <Title to={`/post/${post.id}`}>{post.title}</Title>
+        <Info>
           posted by{"   "}
           <AuthorLink to={`/author/${post.user.id}`}>
             {post.user.nickname}
           </AuthorLink>
           {"   "}|{" "}
           {new Date(post.createdAt).toLocaleString("en", { hour12: false })}
-        </PostInfo>
-      </PostWrapper>
+        </Info>
+      </Wrapper>
       {location.pathname === "/admin" && (
         <ButtonWrapper>
           <Button

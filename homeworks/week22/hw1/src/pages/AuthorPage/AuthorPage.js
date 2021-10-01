@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { getUserPosts } from "../../WebAPI";
-import { useParams } from "react-router-dom";
 import Post from "../../components/Post";
+import useGetPost from "../../customHooks/useGetPosts";
 
 const Root = styled.div``;
 
@@ -33,16 +31,7 @@ const Title = styled.div`
 `;
 
 function AuthorPage() {
-  let { id } = useParams();
-  const [posts, setPosts] = useState([]);
-  const [author, setAuthor] = useState();
-
-  useEffect(() => {
-    getUserPosts(id).then((posts) => {
-      setPosts(posts);
-      setAuthor(posts[0].user.nickname);
-    });
-  }, [id]);
+  const { posts, author } = useGetPost();
 
   return (
     <Root>
@@ -50,12 +39,9 @@ function AuthorPage() {
         <span>{author}</span> 的所有文章
       </Title>
       <PostList>
-        {posts
-          .slice(0)
-          .reverse()
-          .map((post) => (
-            <Post key={post.id} post={post} />
-          ))}
+        {posts.map((post) => (
+          <Post key={post.id} post={post} />
+        ))}
       </PostList>
     </Root>
   );

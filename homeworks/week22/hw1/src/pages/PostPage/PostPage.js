@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { getPost } from "../../WebAPI";
-import { useParams } from "react-router-dom";
+import useGetPost from "../../customHooks/useGetPosts";
+import { useHistory } from "react-router-dom";
 
 const Root = styled.div``;
 
@@ -39,15 +38,26 @@ const PostBody = styled.div`
   word-break: break-all;
 `;
 
-function PostPage() {
-  const { id } = useParams();
-  const [post, setPost] = useState([]);
+const Button = styled.button`
+  padding: 12px;
+  background: #ff8100;
+  color: white;
+  border: solid 1px #ff8100;
+  cursor: pointer;
+  float: right;
 
-  useEffect(() => {
-    getPost(id).then((data) => {
-      setPost(data);
-    });
-  }, [id]);
+  &:hover {
+    background: #ff8100;
+  }
+
+  & + & {
+    margin-left: 5px;
+  }
+`;
+
+function PostPage() {
+  const { post } = useGetPost();
+  const history = useHistory();
 
   return (
     <Root>
@@ -59,6 +69,13 @@ function PostPage() {
           </PostInfo>
         </PostTop>
         <PostBody>{post.body}</PostBody>
+        <Button
+          onClick={() => {
+            history.goBack();
+          }}
+        >
+          Back
+        </Button>
       </PostContainer>
     </Root>
   );
