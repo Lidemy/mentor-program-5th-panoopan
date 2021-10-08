@@ -1,10 +1,6 @@
-import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
-import { getAdminPosts } from "../../WebAPI";
-import { AuthContext } from "../../context";
 import Post from "../../components/Post";
-import { checkLogin } from "../../utils";
+import useGetPost from "../../customHooks/useGetPosts";
 
 const Root = styled.div``;
 
@@ -21,19 +17,7 @@ const PostList = styled.div`
 `;
 
 function AdminPage() {
-  const [posts, setPosts] = useState([]);
-  const { user } = useContext(AuthContext);
-  const history = useHistory();
-
-  useEffect(() => {
-    if (checkLogin(user)) {
-      getAdminPosts(user).then((posts) => {
-        setPosts(posts);
-      });
-    } else {
-      history.push("/");
-    }
-  }, [user, posts, history]);
+  const { posts } = useGetPost();
 
   return (
     <Root>

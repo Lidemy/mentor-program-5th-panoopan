@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext, LoadingContext } from "../../context";
-import { setAuthToken } from "../../utils";
+import useUsers from "../../customHooks/useUsers";
 
-const HeaderContainer = styled.div`
+const Container = styled.div`
   display: flex;
   align-items: center;
   position: fixed;
@@ -70,22 +70,14 @@ const Nav = styled(Link)`
   `}
 `;
 
-function Header() {
+function Navbar() {
   const location = useLocation();
-  const history = useHistory();
-  const { user, setUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const { isLoading } = useContext(LoadingContext);
-
-  const handleLogout = () => {
-    setAuthToken("");
-    setUser(null);
-    if (location.pathname !== "/") {
-      history.push("/");
-    }
-  };
+  const { handleLogout } = useUsers();
 
   return (
-    <HeaderContainer>
+    <Container>
       <Brand to={"/"}>
         <span>Orange</span> & Black
       </Brand>
@@ -130,8 +122,8 @@ function Header() {
           </NavbarList>
         )}
       </Wrapper>
-    </HeaderContainer>
+    </Container>
   );
 }
 
-export default Header;
+export default Navbar;

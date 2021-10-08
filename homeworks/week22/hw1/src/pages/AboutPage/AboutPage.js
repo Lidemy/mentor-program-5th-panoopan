@@ -13,8 +13,13 @@ const Background = styled.div`
   width: 90%;
   margin: auto;
 
+  @media screen and (max-width: 576px) {
+    height: 100vh;
+    margin: 100px auto 60px auto;
+  }
+
   @media screen and (max-width: 768px) {
-    margin: 100px auto;
+    margin: 100px auto 60px auto;
   }
 `;
 
@@ -39,6 +44,11 @@ const InfoContent = styled.div`
   span {
     font-weight: bold;
   }
+
+  @media screen and (max-width: 576px) {
+    line-height: 1.5;
+    margin-top: 120px;
+  }
 `;
 
 const Avatar = styled.img`
@@ -49,6 +59,10 @@ const Avatar = styled.img`
   top: 0%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media screen and (max-width: 576px) {
+    margin: 50px 0;
+  }
 `;
 
 function AboutPage() {

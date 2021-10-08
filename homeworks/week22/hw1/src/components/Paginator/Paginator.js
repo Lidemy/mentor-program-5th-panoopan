@@ -4,7 +4,6 @@ import React, { memo } from "react";
 
 const Container = styled.div`
   text-align: center;
-  margin-top: 60px;
 `;
 
 const Button = styled.button`

@@ -3,9 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./components/App";
 import styled, { createGlobalStyle } from "styled-components";
 
-const Root = styled.div`
-  overflow: hidden;
-`;
+const Root = styled.div``;
 
 const GlobalStyle = createGlobalStyle`
   body {
